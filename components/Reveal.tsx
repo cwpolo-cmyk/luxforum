@@ -12,11 +12,6 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
     const el = ref.current;
     if (!el) return;
 
-    if (!("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {

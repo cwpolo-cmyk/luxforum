@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { nav, site } from "@/content/home";
 
@@ -31,9 +32,9 @@ export function Nav() {
   return (
     <header className="on-ink sticky top-0 z-50 bg-ink text-parchment">
       <nav aria-label="Primary" className="mx-auto flex h-16 max-w-[1360px] items-center justify-between px-4 md:px-10">
-        <a href="/" aria-label={`${site.name} home`} className="flex items-center">
+        <Link href="/" aria-label={`${site.name} home`} className="flex items-center">
           <Image src={site.logo} alt={site.name} width={170} height={36} priority className="h-8 w-auto" />
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
           {nav.links.map((link) => (

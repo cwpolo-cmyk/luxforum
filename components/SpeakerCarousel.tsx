@@ -118,7 +118,7 @@ export function SpeakerCarousel() {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
         onClickCapture={onClickCapture}
-        className={`mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 pl-4 pr-4 md:pl-10 md:pr-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+        className={`mt-12 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto pb-6 pl-4 pr-4 md:scroll-px-10 md:pl-10 md:pr-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
           dragging ? "cursor-grabbing snap-none select-none" : "cursor-grab"
         }`}
       >

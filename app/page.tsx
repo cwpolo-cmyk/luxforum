@@ -5,7 +5,6 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { InfoCard } from "@/components/InfoCard";
 import { Nav } from "@/components/Nav";
-import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Reveal } from "@/components/Reveal";
 import { SpeakerCarousel } from "@/components/SpeakerCarousel";
 import { nextEvent, site, venue } from "@/content/home";
@@ -27,7 +26,8 @@ const organizationJsonLd = {
     postalCode: venue.postalCode,
     addressCountry: "US",
   },
-  // TODO: add contactPoint email and social profile URLs (sameAs) once confirmed
+  email: site.contactEmail ?? undefined,
+  // TODO: add social profile URLs (sameAs) once confirmed
 };
 
 const eventJsonLd = {
@@ -86,7 +86,6 @@ export default function HomePage() {
         </Reveal>
         <FeatureCards />
         <AboutBand />
-        <NewsletterCTA />
       </main>
 
       <Suspense fallback={null}>

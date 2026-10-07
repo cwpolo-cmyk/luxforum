@@ -38,6 +38,11 @@ export async function Footer() {
             <br />
             {venue.city}, {venue.region} {venue.postalCode}
           </address>
+          {site.contactEmail && (
+            <a href={`mailto:${site.contactEmail}`} className="mt-3 block text-[18px] underline underline-offset-4 hover:text-candlelight">
+              {site.contactEmail}
+            </a>
+          )}
           <a href={nav.donate.href} className="mt-6 inline-flex bg-candlelight px-5 py-2.5 text-[16px] font-semibold text-ink hover:opacity-90">
             {nav.donate.label}
           </a>

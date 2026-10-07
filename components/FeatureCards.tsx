@@ -1,11 +1,13 @@
-import { featureCards, site } from "@/content/home";
+import Image from "next/image";
+import { featureCards, nextEvent, venue } from "@/content/home";
 import { Reveal } from "./Reveal";
 
 export function FeatureCards() {
-  const { topics, featuredLecture } = featureCards;
+  const { topics, upcoming } = featureCards;
+  const { speaker } = nextEvent;
 
   return (
-    <section aria-label="Topics and featured lecture" className="mx-auto max-w-[1360px] px-4 py-8 md:px-10 md:py-12">
+    <section aria-label="Topics and upcoming event" className="mx-auto max-w-[1360px] px-4 py-8 md:px-10 md:py-12">
       <Reveal>
         <div className="grid gap-6 md:grid-cols-2">
           <article className="on-ink flex flex-col bg-ink p-8 text-parchment md:p-12">
@@ -24,61 +26,63 @@ export function FeatureCards() {
             <p className="mt-8 text-[18px] leading-[1.55] text-parchment/85">{topics.thread}</p>
           </article>
 
-          <article className="flex flex-col border border-hairline bg-parchment p-8 md:p-12">
-            <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-muted">{featuredLecture.eyebrow}</p>
+          <article aria-labelledby="upcoming-heading" className="flex flex-col border border-hairline bg-parchment p-8 md:p-12">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-muted">{upcoming.eyebrow}</p>
 
-            <div className="relative mt-6 aspect-video w-full overflow-hidden bg-ink">
-              {/* TODO: add a featured past lecture video URL in content/home.ts (featureCards.featuredLecture.videoUrl) */}
-              {featuredLecture.videoUrl ? (
-                <a
-                  href={featuredLecture.videoUrl}
-                  aria-label={`Play ${featuredLecture.title}`}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <PlayButton />
-                </a>
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button
-                    type="button"
-                    disabled
-                    aria-label="Play featured lecture (video coming soon)"
-                    className="flex h-16 w-16 items-center justify-center rounded-full bg-parchment/25 text-parchment disabled:cursor-not-allowed"
-                  >
-                    <PlayIcon />
-                  </button>
-                </div>
-              )}
+            <div className="mt-6 flex flex-wrap items-center gap-5">
+              <Image
+                src={speaker.photo}
+                alt={speaker.photoAlt}
+                width={112}
+                height={112}
+                loading="lazy"
+                className="h-24 w-24 flex-none object-cover md:h-28 md:w-28"
+              />
+              <div className="min-w-0">
+                <h2 id="upcoming-heading" className="text-[36px] font-semibold leading-[1.05] md:text-[44px]">
+                  {nextEvent.title}
+                </h2>
+                <p className="mt-1 text-[18px] italic text-muted">
+                  {speaker.name}, {speaker.descriptor}
+                </p>
+              </div>
             </div>
 
-            <h3 className="mt-6 text-[30px] font-semibold leading-[1.1]">{featuredLecture.title}</h3>
-            <p className="mt-2 text-[17px] italic text-muted">{featuredLecture.speaker}</p>
-            <p className="mt-auto pt-6 text-[15px] text-muted">
-              Watch more on{" "}
-              <a href={site.url} className="underline underline-offset-4 text-ink">
-                luxforum.org
+            <p className="mt-6 text-[18px] leading-[1.6] text-muted">{nextEvent.description}</p>
+
+            <dl className="mt-6 divide-y divide-hairline border-y border-hairline text-[17px]">
+              <div className="flex justify-between gap-6 py-3">
+                <dt className="text-muted">When</dt>
+                <dd className="text-right">
+                  {nextEvent.dateLabel} · {nextEvent.timeLabel}
+                  <span className="block text-[15px] text-muted">{nextEvent.scheduleLabel}</span>
+                </dd>
+              </div>
+              <div className="flex justify-between gap-6 py-3">
+                <dt className="text-muted">Where</dt>
+                <dd className="text-right">
+                  {venue.name}
+                  <span className="block text-[15px] text-muted">{venue.street}, {venue.city}</span>
+                </dd>
+              </div>
+              <div className="flex justify-between gap-6 py-3">
+                <dt className="text-muted">Admission</dt>
+                <dd className="text-right">{nextEvent.price}</dd>
+              </div>
+            </dl>
+
+            <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-8">
+              <a
+                href={nextEvent.rsvp.href}
+                className="inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-[18px] text-parchment transition-opacity hover:opacity-90"
+              >
+                {upcoming.rsvpLabel} <span aria-hidden="true">→</span>
               </a>
-              .
-            </p>
+              <p className="text-[14px] italic text-muted">{nextEvent.sponsor}</p>
+            </div>
           </article>
         </div>
       </Reveal>
     </section>
-  );
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor">
-      <path d="M8 5.5v13l11-6.5z" />
-    </svg>
-  );
-}
-
-function PlayButton() {
-  return (
-    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-candlelight text-ink">
-      <PlayIcon />
-    </span>
   );
 }

@@ -20,8 +20,7 @@ export const site = {
   aboutUrl: "https://luxforum.org/about-us/",
   // TODO: confirm the Contact Us path (the page was not reachable during build)
   contactUrl: "https://luxforum.org/contact-us/",
-  // TODO: confirm the public contact email from the Contact Us page
-  contactEmail: null as string | null,
+  contactEmail: "info@luxforum.org" as string | null,
   donateUrl: "https://luxforumevents.givingfuel.com/lux-forum",
   // TODO: add social profile URLs; a null entry shows as a placeholder in the footer
   socials: [
@@ -62,7 +61,7 @@ export const hero = {
   support:
     "Lectures on science, the arts, technology, economics and faith, with face-to-face access to the thinkers themselves.",
   primaryCta: { label: "See upcoming events", href: site.eventsUrl },
-  secondaryCta: { label: "Join the list", href: "#newsletter" },
+  secondaryCta: { label: "RSVP for October 18", href: "https://www.paperlesspost.com/go/5DQPRRMubrj8njcD84RjA" },
   // TODO: add a photo of the Historic Theatre or an audience (none available yet)
   image: { src: null as string | null, alt: "The Historic Theatre in Yountville, where Lux Forum lectures are held" },
 };
@@ -98,10 +97,10 @@ export const nextEvent = {
 export type Speaker = {
   name: string;
   slug: string;
-  // Speaker photo path under /public/speakers/. Null shows a monogram placeholder.
-  // TODO: download the photos from each speaker's page (luxforum.org was unreachable during build)
+  // Speaker photo path under /public/speakers/. Null shows the monogram placeholder.
+  // On hold: past speakers use the monogram for now.
   photo: string | null;
-  // TODO: link each speaker to their speaker page. Null renders the card without a link.
+  // Speaker page URL. Null renders the card without a link. On hold for now.
   href: string | null;
 };
 
@@ -147,13 +146,10 @@ export const featureCards = {
     items: site.topics,
     thread: site.faithThread,
   },
-  featuredLecture: {
-    eyebrow: "Featured past lecture",
-    // TODO: add the title, speaker and video URL for a past lecture
-    title: "Featured lecture (TODO)",
-    speaker: "TODO: speaker name",
-    videoUrl: null as string | null,
-    poster: null as string | null,
+  // Right card: the upcoming event (past lectures are on hold). Content comes from nextEvent.
+  upcoming: {
+    eyebrow: "Upcoming event",
+    rsvpLabel: "RSVP — it's free",
   },
 };
 
@@ -185,17 +181,4 @@ export const info = {
     contact: { label: "Contact us", href: site.contactUrl },
     donate: { label: "Donate", href: site.donateUrl },
   },
-};
-
-export const newsletter = {
-  eyebrow: "Newsletter",
-  heading: "Be the first to know about upcoming Lux Forum events.",
-  label: "Email address",
-  placeholder: "you@example.com",
-  submit: "Join the list",
-  success: "Thank you. You're on the list.",
-  error: "Something went wrong. Please try again.",
-  invalid: "Enter a valid email address, such as name@example.com.",
-  // TODO: connect provider (Mailchimp/Klaviyo/etc.). The form currently simulates success.
-  provider: null as string | null,
 };
